@@ -2,13 +2,19 @@
 <mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns:secure-properties="http://www.mulesoft.org/schema/mule/secure-properties"
   xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
-	http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+	http://www.mulesoft.org/schema/mule/secure-properties http://www.mulesoft.org/schema/mule/secure-properties/current/mule-secure-properties.xsd">
   <http:listener-config name="http-config-ref" >
       <http:listener-connection host="0.0.0.0" port="8081" />
   </http:listener-config>
+  <configuration-properties file="properties/${mule.env}-properties.yaml" doc:name="Configuration properties" />
+  <secure-properties:config file="properties/${mule.env}-properties.yaml" key="${mule.key}" name="securePropertiesConfig">
+    <secure-properties:encrypt algorithm="Blowfish"/>
+  </secure-properties:config>
   <flow name="test-ch2-main" doc:name="test-ch2-main">
     <http:listener path="path" config-ref="http-config-ref" doc:name="Listener" doc:id="hhgufx" />
-    <set-payload value="#['Success']" doc:name="Set payload" doc:id="zhlkjm" />
+    <set-payload value="#[Mule::p('secure::test')]" doc:name="Set payload" doc:id="zhlkjm" />
   </flow> 
 </mule>

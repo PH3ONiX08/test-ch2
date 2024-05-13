@@ -1,8 +1,13 @@
-name: Publish to Exchange & Deploy to CH2.0
+name: Workflow Dispatch Publish to Exchange & Deploy to CH2.0
 
 on:
-  push:
-    branches: [ main ]
+  workflow_dispatch:
+    inputs:
+        environment:
+            description: 'The environment to deploy to'
+            required: true
+            type: environment
+
     
 jobs:         
   build:
@@ -28,9 +33,13 @@ jobs:
         run: |
           mvn deploy --settings .maven/settings.xml -DskipMunitTests \
           -Dclient.id="${{ secrets.CONNECTED_APP_CLIENT_ID }}" \
-          -Dclient.secret="${{ secrets.CONNECTED_APP_CLIENT_SECRET }}"
+          -Dclient.secret="${{ secrets.CONNECTED_APP_CLIENT_SECRET }}" \
+          -Dmule.env="${{ github.event.inputs.environment.ENV }}" \
+          -Dmule.key="${{ github.event.inputs.environment.secrets.SECRET_KEY }}"
       - name: Deploy to CloudHub 2.0
         run: |
           mvn deploy --settings .maven/settings.xml -DskipMunitTests -DmuleDeploy \
           -Dclient.id="${{ secrets.CONNECTED_APP_CLIENT_ID }}" \
-          -Dclient.secret="${{ secrets.CONNECTED_APP_CLIENT_SECRET }}" 
+          -Dclient.secret="${{ secrets.CONNECTED_APP_CLIENT_SECRET }}" \
+          -Dmule.env="${{ github.event.inputs.environment.ENV }}" \
+          -Dmule.key="${{ github.event.inputs.environment.secrets.SECRET_KEY }}"

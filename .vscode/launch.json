@@ -7,7 +7,7 @@
         "name": "Debug Mule Application",
         "mule.project": "${workspaceFolder}",
         "mule.home": "${config:mule.runtime.muleHome}",
-        "mule.runtime.args": "${config:mule.runtime.defaultArguments}"
+        "mule.runtime.args": "${config:mule.runtime.defaultArguments} -M-Dmule.env=Dev -M-Dmule.key=abc123"
       }
     ]
   }
