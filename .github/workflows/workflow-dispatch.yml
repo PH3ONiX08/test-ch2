@@ -7,13 +7,14 @@ on:
             description: 'The environment to deploy to'
             required: true
             type: environment
-
     
 jobs:
   deploy:
+    environment: ${{ github.event.inputs.environment }}
     runs-on: ubuntu-latest
     steps:
-        - run: echo "${{ github.event.inputs.environment }}"
+        - run: echo "${{ vars.ENV }}"
+        - run: echo "${{ secrets.SECRET_KEY }}"
 #  build:
 #    runs-on: ubuntu-latest
 #    steps:
