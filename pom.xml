@@ -5,7 +5,7 @@
 
     <groupId>32c31681-0db1-4337-af1b-dd86a0db8beb</groupId>
     <artifactId>test-ch2</artifactId>
-    <version>1.0.1</version>
+    <version>1.0.2</version>
     <packaging>mule-application</packaging>
 
     <name>test-ch2</name>
