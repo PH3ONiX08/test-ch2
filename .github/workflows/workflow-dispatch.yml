@@ -9,37 +9,43 @@ on:
             type: environment
 
     
-jobs:         
-  build:
+jobs:
+  deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout this repo
-        uses: actions/checkout@v4
-
-      - name: Cache dependencies
-        uses: actions/cache@v4
-        with:
-          path: ~/.m2/repository
-          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
-          restore-keys: ${{ runner.os }}-maven-
-
-      - name: Set up JDK 1.8
-        uses: actions/setup-java@v4
-        with:
-          distribution: "zulu"
-          java-version: 8
-      
-      - name: Publish to Exchange
-        run: |
-          mvn deploy --settings .maven/settings.xml -DskipMunitTests \
-          -Dclient.id="${{ secrets.CONNECTED_APP_CLIENT_ID }}" \
-          -Dclient.secret="${{ secrets.CONNECTED_APP_CLIENT_SECRET }}" \
-          -Dmule.env="${{ github.event.inputs.environment.ENV }}" \
-          -Dmule.key="${{ github.event.inputs.environment.secrets.SECRET_KEY }}"
-      - name: Deploy to CloudHub 2.0
-        run: |
-          mvn deploy --settings .maven/settings.xml -DskipMunitTests -DmuleDeploy \
-          -Dclient.id="${{ secrets.CONNECTED_APP_CLIENT_ID }}" \
-          -Dclient.secret="${{ secrets.CONNECTED_APP_CLIENT_SECRET }}" \
-          -Dmule.env="${{ github.event.inputs.environment.ENV }}" \
-          -Dmule.key="${{ github.event.inputs.environment.secrets.SECRET_KEY }}"
+        - run: echo "${{ inputs.environment.ENV }}"
+        - run: echo "${{ inputs.environment.secrets.SECRET_KEY }}"
+        - run: echo "${{ inputs.environment.SECRET_KEY }}"
+#  build:
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: Checkout this repo
+#        uses: actions/checkout@v4
+#
+#      - name: Cache dependencies
+#        uses: actions/cache@v4
+#        with:
+#          path: ~/.m2/repository
+#          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+#          restore-keys: ${{ runner.os }}-maven-
+#
+#      - name: Set up JDK 1.8
+#        uses: actions/setup-java@v4
+#        with:
+#          distribution: "zulu"
+#          java-version: 8
+#      
+#      - name: Publish to Exchange
+#        run: |
+#          mvn deploy --settings .maven/settings.xml -DskipMunitTests \
+#          -Dclient.id="${{ secrets.CONNECTED_APP_CLIENT_ID }}" \
+#          -Dclient.secret="${{ secrets.CONNECTED_APP_CLIENT_SECRET }}" \
+#          -Dmule.env="${{ github.event.inputs.environment.ENV }}" \
+#          -Dmule.key="${{ github.event.inputs.environment.secrets.SECRET_KEY }}"
+#      - name: Deploy to CloudHub 2.0
+#        run: |
+#          mvn deploy --settings .maven/settings.xml -DskipMunitTests -DmuleDeploy \
+#          -Dclient.id="${{ secrets.CONNECTED_APP_CLIENT_ID }}" \
+#          -Dclient.secret="${{ secrets.CONNECTED_APP_CLIENT_SECRET }}" \
+#          -Dmule.env="${{ github.event.inputs.environment.ENV }}" \
+#          -Dmule.key="${{ github.event.inputs.environment.secrets.SECRET_KEY }}"
