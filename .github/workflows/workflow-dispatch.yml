@@ -13,9 +13,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-        - run: echo "${{ inputs.environment.ENV }}"
-        - run: echo "${{ inputs.environment.secrets.SECRET_KEY }}"
-        - run: echo "${{ inputs.environment.SECRET_KEY }}"
+        - run: echo "${{ github.event.inputs.environment }}"
 #  build:
 #    runs-on: ubuntu-latest
 #    steps:
