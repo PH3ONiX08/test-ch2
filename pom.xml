@@ -5,7 +5,7 @@
 
     <groupId>32c31681-0db1-4337-af1b-dd86a0db8beb</groupId>
     <artifactId>test-ch2</artifactId>
-    <version>1.0.2</version>
+    <version>1.0.0</version>
     <packaging>mule-application</packaging>
 
     <name>test-ch2</name>
@@ -36,7 +36,7 @@
                         <environment>${mule.env}</environment>
                         <target>Cloudhub-US-East-2</target>
                         <server>Repository</server>
-                        <applicationName>${project.artifactId}</applicationName>
+                        <applicationName>${project.artifactId}-${mule.env}</applicationName>
                         <releaseChannel>NONE</releaseChannel>
                         <replicas>1</replicas>
                         <vCores>0.1</vCores>
