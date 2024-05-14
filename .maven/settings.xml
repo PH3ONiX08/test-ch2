@@ -4,20 +4,7 @@
   <pluginGroups>
     <pluginGroup>org.mule.tools</pluginGroup>
   </pluginGroups>
-
-  <profiles>
-    <profile>
-      <id>inject-group-id</id>
-      <properties>
-        <group-id>${groupId}</group-id>
-      </properties>
-    </profile>
-  </profiles>
-
-  <activeProfiles>
-    <activeProfile>inject-group-id</activeProfile>
-  </activeProfiles>
-
+  
   <servers>
     <server>
       <id>Repository</id>

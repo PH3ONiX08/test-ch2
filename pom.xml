@@ -46,6 +46,7 @@
                         <properties>
 							<mule.env>${mule.env}</mule.env>
 							<mule.key>${mule.key}</mule.key>
+                            <group-id>${groupId}</group-id>
 						</properties>
                     </cloudhub2Deployment>
                 </configuration>
