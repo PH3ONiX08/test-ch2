@@ -3,7 +3,7 @@
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>32c31681-0db1-4337-af1b-dd86a0db8beb</groupId>
+    <groupId>c91eaa56-85a1-4f46-ab13-34704a5850ee</groupId>
     <artifactId>test-ch2-00</artifactId>
     <version>1.0.0</version>
     <packaging>mule-application</packaging>
@@ -46,7 +46,6 @@
                         <properties>
 							<mule.env>${mule.env}</mule.env>
 							<mule.key>${mule.key}</mule.key>
-                            <group-id>${groupId}</group-id>
 						</properties>
                     </cloudhub2Deployment>
                 </configuration>
@@ -69,7 +68,7 @@
         <repository>
             <id>Repository</id>
             <name>Private Exchange repository</name>
-            <url>https://maven.anypoint.mulesoft.com/api/v3/organizations/${group-id}/maven</url>
+            <url>https://maven.anypoint.mulesoft.com/api/v3/organizations/${groupId}/maven</url>
             <layout>default</layout>
         </repository>
     </repositories>
@@ -102,7 +101,7 @@
         <repository>
             <id>Repository</id>
             <name>Corporate Repository</name>
-            <url>https://maven.anypoint.mulesoft.com/api/v3/organizations/${group-id}/maven</url>
+            <url>https://maven.anypoint.mulesoft.com/api/v3/organizations/${groupId}/maven</url>
             <layout>default</layout>
         </repository>
     </distributionManagement>
